@@ -1,13 +1,20 @@
-import { MoreVert, Phone, Videocam } from '@mui/icons-material'
+import { AttachFile, InsertEmoticon, Mic, MoreVert, Phone, Videocam } from '@mui/icons-material'
 import { Avatar, IconButton } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import ChatBubble from './ChatBubble'
 
 const Chat = () => {
   const [seed, setSeed] = useState(0)
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000))
   }, [])
+
+ const sendMessage = (e) => {
+    e.preventDefault();
+    setInput('')
+  }
 
   return (
     <div className="flex flex-[0.65] flex-col">
@@ -34,19 +41,45 @@ const Chat = () => {
       {/* Chat body */}
 
       <div className="flex-1 overflow-y-auto bg-chat-wallpaper bg-cover bg-center bg-no-repeat p-7 scrollbar-thin scrollbar-thumb-gray-300">
-        <p
-          className={`relative mb-6 w-[fit-content] rounded-lg bg-white p-2 text-[16px] before:absolute  before:bottom-3 before:right-[-5px]
-          before:h-[10px] before:w-[10px] before:rotate-45 before:bg-white
-          
-          ${true && `ml-auto`}
-          
-          `}>
-          <span className="absolute top-[-18px] left-1 text-[12px] font-bold">Nombre</span>
-          Some Message
-          <span className="ml-2 text-[10px] font-bold text-gray-500 ">03:03 am</span>
-        </p>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={false}/>
+          <ChatBubble state={true}/>
+          <ChatBubble state={false}/>
       </div>
       {/* Chat footer */}
+
+      <div className="flex items-center justify-content h-[62px] border-t border-gray-300 px-2 ">
+        <IconButton>
+          <InsertEmoticon/>
+        </IconButton>
+        <IconButton>
+          <AttachFile/>
+        </IconButton>
+
+        <form action="" className="flex flex-1">
+          <input value={input} onChange={e => setInput(e.target.value)} className="flex-1 rounded-[30px] p-2 border-none outline-none" type="text" placeholder="Type a message" />
+          <button onClick={sendMessage} className="hidden">send a message</button>
+        </form>
+        <IconButton>
+          <Mic/>
+        </IconButton>
+      </div>
     </div>
   )
 }
